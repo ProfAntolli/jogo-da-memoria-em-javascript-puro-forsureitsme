@@ -6,6 +6,7 @@
   margin-inline: auto;
   border-radius: 6px;
   padding: 10px;
+  perspective: 1000px;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);

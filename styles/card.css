@@ -1,37 +1,19 @@
 .memory__card {
-  aspect-ratio: 6 / 9;
+  aspect-ratio: 0.689 / 1;
   border-radius: 6px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   height: 100%;
-
-  &::before, &::after {
-    background-image: conic-gradient(
-      transparent,
-      transparent,
-      transparent,
-      maroon
-    );
-
-    --animation-duration: 5s;
-    animation: spin var(--animation-duration) linear infinite;
-
-    width: 200%;
-    height: 200%;
-    position: absolute;
-    content: "";
-    display: block;
-    z-index: -1;
-  }
-
-  &::after {
-    animation-delay: calc(var(--animation-duration) / -2);
-  }
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 1s;
+  border: 2px solid maroon;
 }
 
+.memory__card_front,
 .memory__card_back {
   /* Textura da parte de trás da carta: "Backgrounds" por Écrivain, licensa CC0 1.0 DEED: https://opengameart.org/content/backgrounds-0 */
   background-image: url(../img/card-back.png);
@@ -39,17 +21,33 @@
   content: "";
   inset: 2px;
   display: block;
-
   background-size: cover;
   background-position: center;
+  border-radius: 6px;
+  backface-visibility: hidden;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
+.memory__card_front {
+  transform: rotateY(180deg);
+  background-color: white;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+/* Textura da parte da frente das cartas, licensiadas em domínio público, obtidas em https://code.google.com/archive/p/vector-playing-cards/ */
+.memory__card_front--foreground-0 {
+  background-image: url(../img/foreground-0.svg);
+}
+.memory__card_front--foreground-1 {
+  background-image: url(../img/foreground-1.svg);
+}
+.memory__card_front--foreground-2 {
+  background-image: url(../img/foreground-2.svg);
+}
+.memory__card_front--foreground-3 {
+  background-image: url(../img/foreground-3.svg);
+}
+.memory__card_front--foreground-4 {
+  background-image: url(../img/foreground-4.svg);
+}
+.memory__card_front--foreground-5 {
+  background-image: url(../img/foreground-5.svg);
 }
