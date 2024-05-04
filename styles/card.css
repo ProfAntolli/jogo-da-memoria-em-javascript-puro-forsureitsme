@@ -1,0 +1,55 @@
+.memory__card {
+  aspect-ratio: 6 / 9;
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 100%;
+
+  &::before, &::after {
+    background-image: conic-gradient(
+      transparent,
+      transparent,
+      transparent,
+      maroon
+    );
+
+    --animation-duration: 5s;
+    animation: spin var(--animation-duration) linear infinite;
+
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    content: "";
+    display: block;
+    z-index: -1;
+  }
+
+  &::after {
+    animation-delay: calc(var(--animation-duration) / -2);
+  }
+}
+
+.memory__card_back {
+  /* Textura da parte de trás da carta: "Backgrounds" por Écrivain, licensa CC0 1.0 DEED: https://opengameart.org/content/backgrounds-0 */
+  background-image: url(../img/card-back.png);
+  position: absolute;
+  content: "";
+  inset: 2px;
+  display: block;
+
+  background-size: cover;
+  background-position: center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

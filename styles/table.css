@@ -1,0 +1,19 @@
+.memory__table {
+  aspect-ratio: 9 / 16;
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow-y: auto;
+  margin-inline: auto;
+  border-radius: 6px;
+  padding: 10px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+  justify-items: center;
+  align-items: center;
+
+  /* Textura gerada no site https://www.noisetexturegenerator.com */
+  background-image: url(../img/noise.png);
+}
