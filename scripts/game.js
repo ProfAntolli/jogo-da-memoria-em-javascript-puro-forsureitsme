@@ -28,22 +28,43 @@ class Card {
 
 class Game {
   // Tabuleiro inicial com os cards organizados
-  initialBoard = new Array(12).fill(1).map((_, index) => {
+  board = new Array(12).fill(1).map((_, index) => {
     const foregroundIndex = parseInt(index / 2, 10);
-    return new Card(foregroundIndex);
-  });
-  board = null;
+    const card = new Card(foregroundIndex);
 
-  constructor(table) {
-    this.table = table;
+    // Atribui evento de clique no elemento da carta como seleção
+    card.element.addEventListener("click", () => this.selectCard(card));
+
+    return card;
+  });
+  table = document.querySelector(".memory__table");
+  gameOver = document.querySelector(".memory__game-over");
+
+  constructor() {
+    // Reinicia o jogo ao clicar em "Jogar novamente"
+    document
+      .querySelector(".memory__game-over__play-again")
+      .addEventListener("click", () => {
+        this.restart();
+      });
+  }
+
+  restart() {
+    // Remove marcação de combinações das cartas
+    for (let i = this.board.length - 1; i >= 0; i--) {
+      this.board[i].matched = false;
+    }
+    
+    // Esconde a tela de fim de jogo
+    this.gameOver.classList.remove("memory__game-over--show");
+    
+    // Inicia novamente
+    this.init();
   }
 
   init() {
     // Remove todas as cartas da mesa
     this.table.innerHTML = "";
-
-    // Reinicia o tabuleiro com cards organizados
-    this.board = this.initialBoard;
 
     // Embaralha as cartas do tabuleiro utilizando o método Fisher–Yates
     for (let i = this.board.length - 1; i > 0; i--) {
@@ -56,11 +77,8 @@ class Game {
     // Adiciona as cartas na mesa
     for (let i = 0; i < this.board.length; i++) {
       const card = this.board[i];
-
-      // Atribui evento de clique no elemento da carta como seleção
-      card.element.addEventListener("click", () => this.selectCard(card));
-
       this.table.appendChild(card.element);
+      card.render();
     }
   }
 
@@ -92,6 +110,7 @@ class Game {
       )
     ) {
       this.matchCards(selectedCards);
+      this.checkGameOver();
       return;
     }
 
@@ -125,9 +144,14 @@ class Game {
   toggleLock(state) {
     this.table.classList.toggle("memory__table--locked", state);
   }
+
+  checkGameOver() {
+    // Verifica se todos as cartas foram combinadas e mostra a tela de fim de jogo se necessário
+    if (this.board.every((card) => card.matched)) {
+      this.gameOver.classList.add("memory__game-over--show");
+    }
+  }
 }
 
 // Inicia jogo
-const table = document.querySelector(".memory__table");
-const game = new Game(table);
-game.init();
+new Game().init();
