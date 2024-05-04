@@ -9,12 +9,21 @@
   cursor: pointer;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
-  transition: transform 1s;
-  border: 2px solid maroon;
+  transition: transform 1s, background-color .5s;
+  background-color: maroon;
 }
 
-.memory__card--revealed {
+.memory__card--selected,
+.memory__card--matched {
   transform: rotateY(180deg);
+}
+
+.memory__card--selected {
+  background-color: blue;
+}
+
+.memory__card--matched {
+  background-color: green;
 }
 
 .memory__card_front,

@@ -21,12 +21,8 @@ class Card {
   }
 
   render() {
-    this.element.classList.toggle(
-      "memory__card--revealed",
-      this.matched || this.selected
-    );
-
     this.element.classList.toggle("memory__card--matched", this.matched);
+    this.element.classList.toggle("memory__card--selected", this.selected);
   }
 }
 
@@ -36,7 +32,6 @@ class Game {
     const foregroundIndex = parseInt(index / 2, 10);
     return new Card(foregroundIndex);
   });
-
   board = null;
 
   constructor(table) {
@@ -83,7 +78,6 @@ class Game {
   }
 
   checkMatch() {
-    
     const selectedCards = this.board.filter((card) => card.selected);
 
     // Prossegue com a verificação de combinação somente se houver escolhido duas cartas
@@ -97,7 +91,7 @@ class Game {
         (card) => card.foreground === selectedCards[0].foreground
       )
     ) {
-      // TODO: Marcar cartas como combinadas
+      this.matchCards(selectedCards);
       return;
     }
 
@@ -116,6 +110,15 @@ class Game {
       cards[i].selected = false;
       cards[i].render();
     }
+  }
+
+  // Marca cartas como combinadas e as desseleciona
+  matchCards(cards) {
+    for (let i = cards.length - 1; i >= 0; i--) {
+      cards[i].matched = true;
+    }
+
+    this.unselectCards(cards);
   }
 
   // Bloqueia ações no tabuleiro, previnindo eventos do mouse
