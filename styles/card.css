@@ -13,6 +13,10 @@
   border: 2px solid maroon;
 }
 
+.memory__card--revealed {
+  transform: rotateY(180deg);
+}
+
 .memory__card_front,
 .memory__card_back {
   /* Textura da parte de trás da carta: "Backgrounds" por Écrivain, licensa CC0 1.0 DEED: https://opengameart.org/content/backgrounds-0 */

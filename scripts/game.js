@@ -1,5 +1,5 @@
 class Card {
-  open = false;
+  matched = false;
   selected = false;
   element = document.createElement("div");
   cardBack = document.createElement("div");
@@ -16,6 +16,13 @@ class Card {
 
     this.element.appendChild(this.cardFront);
     this.element.appendChild(this.cardBack);
+  }
+
+  render() {
+    this.element.classList.toggle(
+      "memory__card--revealed",
+      this.matched || this.selected
+    );
   }
 }
 
@@ -50,8 +57,17 @@ class Game {
     // Adiciona as cartas na mesa
     for (let i = 0; i < this.board.length; i++) {
       const card = this.board[i];
+      
+      // Atribui evento de clique no elemento da carta como seleção
+      card.element.addEventListener('click', () => this.selectCard(card));
+
       this.table.appendChild(card.element);
     }
+  }
+
+  selectCard(card) {
+    card.selected = true;
+    card.render();
   }
 }
 

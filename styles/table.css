@@ -2,7 +2,7 @@
   aspect-ratio: 9 / 16;
   max-height: 100vh;
   max-width: 100vw;
-  overflow-y: auto;
+  overflow: hidden;
   margin-inline: auto;
   border-radius: 6px;
   padding: 10px;
