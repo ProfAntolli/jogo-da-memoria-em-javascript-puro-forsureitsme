@@ -18,3 +18,7 @@
   /* Textura gerada no site https://www.noisetexturegenerator.com */
   background-image: url(../img/noise.png);
 }
+
+.memory__table--locked {
+  pointer-events: none;
+}
